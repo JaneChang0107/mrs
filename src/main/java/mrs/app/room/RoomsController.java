@@ -21,21 +21,22 @@ public class RoomsController {
 	@Autowired
 	RoomService roomService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	String listRooms(Model model) {
-		LocalDate today = LocalDate.now();
-		List<ReservableRoom> rooms = roomService.findReservableRooms(today);
-		model.addAttribute("date",today);
-		model.addAttribute("rooms",rooms);
-		return "room/listRooms";
-	}
-	
 	@RequestMapping(path = "{date}", method = RequestMethod.GET)
-	String listRooms(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @PathVariable("date") LocalDate date, Model model) {
+	String listRooms(
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+			@PathVariable("date") LocalDate date, Model model) {
 		List<ReservableRoom> rooms = roomService.findReservableRooms(date);
 		model.addAttribute("rooms",rooms);
 		return "room/listRooms";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	String listRooms(Model model) {
+		LocalDate today = LocalDate.now();
+		model.addAttribute("date",today);
+		return listRooms(today,model);
+	}
+	
 	
 	
 }
