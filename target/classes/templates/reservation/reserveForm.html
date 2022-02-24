@@ -22,7 +22,11 @@
 		  <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">09:00</option>
 		  </select>
 		  <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}" style="color:red">error!</span>
+		  -
+		  <select th:field="*{endTime}">
+		  <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">09:00</option>
 		  </select>
+		   <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}" style="color:red">error!</span>
 		  	<br/>
 		  	<button>予約</button>
 	</form>
