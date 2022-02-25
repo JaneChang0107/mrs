@@ -20,6 +20,8 @@ public class MeetingRoom implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer roomId;
 	
+	private String roomName;
+
 	public Integer getRoomId() {
 		return roomId;
 	}
@@ -27,9 +29,7 @@ public class MeetingRoom implements Serializable {
 	public void setRoomId(Integer roomId) {
 		this.roomId = roomId;
 	}
-
-	private String roomName;
-
+	
 	public String getRoomName() {
 		return roomName;
 	}

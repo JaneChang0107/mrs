@@ -21,7 +21,7 @@ public class RoomsController {
 	@Autowired
 	RoomService roomService;
 	
-	@RequestMapping(path = "{date}", method = RequestMethod.GET)
+	@RequestMapping(value = "{date}", method = RequestMethod.GET)
 	String listRooms(
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 			@PathVariable("date") LocalDate date, Model model) {
