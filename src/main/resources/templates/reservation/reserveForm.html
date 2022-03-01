@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:=th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<h3>WELCOME!</h3>
-<title th:text="|${#temporals.format(date,'yyyy/M/d')}の${room.roomName}|">2022/02/23のA1</title>
+	<meta charset="UTF-8">
+	<h3>WELCOME!</h3>
+	<title th:text="|${#temporals.format(date,'yyyy/M/d')}の${room.roomName}|">2022/02/23のA1</title>
 </head>
 <body>
 	<div>
 	<a th:href="@{'/rooms/' + ${date}}">会議室一覧へ</a>
 	</div>
+	
+	<p style="color:red" th:if="${error !=null}" th:text="${error}"></p>
+	
 	<form th:object="${reservationForm}"
-		  th:action="@{'/reservations/' + ${date} + '/' ${roomId}}" method="post">
+		  th:action="@{'/reservations/' + ${date} + '/' +${roomId}}" method="post">
 		  会議室  : <span th:text = "${room.roomName}">A1</span>
 		  	<br/>
 		  予約者名: <span th:text="${user.lastName + ' ' + user.firstName}">chiga tec</span>
@@ -26,10 +29,11 @@
 		  <select th:field="*{endTime}">
 		  <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">09:00</option>
 		  </select>
-		   <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}" style="color:red">error!</span>
-		  	<br/>
-		  	<button>予約</button>
+		  <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}" style="color:red">error!</span>
+		  <br/>
+		  <button>予約</button>
 	</form>
+	
 	<table>
 	<tr>
 	<th>時間帯</th>
